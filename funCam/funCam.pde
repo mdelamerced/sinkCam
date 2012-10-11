@@ -1,5 +1,6 @@
 //Original code from DanO and Heather Velez
 // Modified by Melissa dela Merced
+// Currently runs on Processing 2.0b1
 
 import processing.video.*;
 
@@ -72,6 +73,9 @@ void draw () {
   text("Press 's' to pause the video.", 200, 70); 
   text("Press 'p' to play the video.", 200, 85);
 }
+
+
+//==========DO NOT MODIFY ANYTHING BELOW THIS LINE=============
 
 
 public class CaptureAxisCamera extends PImage implements Runnable {
