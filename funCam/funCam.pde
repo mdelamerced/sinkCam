@@ -86,10 +86,10 @@ void draw () {
    movie.play();
    }
    }
-   
+ */  
      fill(0);
-  rect(0, 0, width, 100);
- */
+  rect(0, 20, width, 100);
+ 
 println (theBlobDetection.getBlobNb());
  int few = 30;
  int some = 45;
