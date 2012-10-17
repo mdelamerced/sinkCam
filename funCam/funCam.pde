@@ -6,7 +6,6 @@
 import processing.video.*;
 import blobDetection.*;
 
-
 import java.awt.Dimension; 
 import java.awt.Image; 
 import java.awt.image.BufferedImage; 
@@ -37,7 +36,7 @@ PImage img;
 boolean newFrame=false;
 
 void setup() {
-  size (640*2, 480);
+  size (640, 480);
    
     background (0);
   video = new CaptureAxisCamera(this, "128.122.151.82", 640, 480, false);
@@ -49,20 +48,31 @@ void setup() {
   img = new PImage(80, 60); 
   theBlobDetection = new BlobDetection(img.width, img.height);
   theBlobDetection.setPosDiscrimination(true);
-  theBlobDetection.setThreshold(0.2f); // will detect bright areas whose luminosity > 0.2f;
+  theBlobDetection.setThreshold(0.3f); // will detect bright areas whose luminosity > 0.2f;
 }
 
 void captureEvent(CaptureAxisCamera video) {
   video.read();
   newFrame=true;
-
+}
 
 void draw () {
   if (video.available()) {
     video.read();
 
-    image(video, 641, 0, 640, 480);
+    image(video, 0, 0, 640, 480);
   }
+   if (newFrame)
+  {
+    newFrame=false;
+  //  image(video,50,100,width,height);
+    img.copy(video,50, 50, 640, 480, 
+        0, 0, img.width, img.height);
+   // fastblur(img, 2);
+    theBlobDetection.computeBlobs(img.pixels);
+  //  drawBlobsAndEdges(true,true);
+  }
+ 
 
   /*  movie.read();
    image(movie, 0, 0);
@@ -76,20 +86,51 @@ void draw () {
    movie.play();
    }
    }
-   */
-  fill(0);
+   
+     fill(0);
   rect(0, 0, width, 100);
-  fill(255);
+ */
+println (theBlobDetection.getBlobNb());
+ int few = 30;
+ int some = 45;
+ int many = 50;
+ 
+ if (theBlobDetection.getBlobNb()<few){
+   fill(#066718);
+   noStroke();
+   ellipse(100,80,50,50);
+   textFont(myFont,40);
+   text("CLEAN", 250,100);
+ }
+ 
+ else if (theBlobDetection.getBlobNb() < some){
+   fill(#DFCC3A);
+    noStroke();
+   ellipse(100,80,50,50);
+   textFont(myFont,40);
+   text("NOT CLEAN", 200,100);
+ }
+ else if (theBlobDetection.getBlobNb() > many){
+   fill(255,0,0);
+    noStroke();
+   ellipse(100,80,50,50);
+   textFont(myFont,40);
+   text("DIRTY", 260,100);
+ }
+
+  fill(255, 0 ,0);
   textFont(myFont, 48);
-  text("sinkCam", 550, 50);
+  text("#sinkCam", 200, 70);
   fill(255, 0, 0);
 //  text("before", 205, 50);
-  text("now", 900, 50);
+ // text("now", 900, 50);
   //fill(255);
  // textFont(lowFont, 18);
 //  text("Press 's' to pause the video.", 200, 70); 
  // text("Press 'p' to play the video.", 200, 85);
-
+ 
+}
+/* debug
   void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
   {
     noFill();
@@ -130,7 +171,7 @@ void draw () {
       }
     }
   }
-
+*/
   //==========DO NOT MODIFY ANYTHING BELOW THIS LINE=============
 
 
