@@ -2,6 +2,8 @@
 //Original code from DanO and Heather Velez
 // Modified by Melissa dela Merced
 // Currently runs on Processing 2.0b1
+// Current version works for Processing 2.0b3
+
 
 import processing.video.*;
 import blobDetection.*;
@@ -70,7 +72,7 @@ void draw () {
         0, 0, img.width, img.height);
    // fastblur(img, 2);
     theBlobDetection.computeBlobs(img.pixels);
-  //  drawBlobsAndEdges(true,true);
+   drawBlobsAndEdges(true,true);
   }
  
 
@@ -91,9 +93,9 @@ void draw () {
   rect(0, 20, width, 100);
  
 println (theBlobDetection.getBlobNb());
- int few = 30;
- int some = 45;
- int many = 50;
+ int few = 45;
+ int some = 50;
+ int many = 51;
  
  if (theBlobDetection.getBlobNb()<few){
    fill(#066718);
@@ -130,7 +132,7 @@ println (theBlobDetection.getBlobNb());
  // text("Press 'p' to play the video.", 200, 85);
  
 }
-/* debug
+
   void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
   {
     noFill();
@@ -171,7 +173,7 @@ println (theBlobDetection.getBlobNb());
       }
     }
   }
-*/
+
   //==========DO NOT MODIFY ANYTHING BELOW THIS LINE=============
 
 
